@@ -446,6 +446,66 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             position: relative;
             z-index: 2;
+            background-color: var(--white);
+            /* Add scroll shadowing effect */
+            background-image: 
+                linear-gradient(to right, var(--white) 75%, rgba(255, 255, 255, 0)),
+                linear-gradient(to right, rgba(255, 255, 255, 0), var(--white) 25%);
+            background-position: 0 0, 100% 0;
+            background-repeat: no-repeat;
+            background-size: 20px 100%;
+            background-attachment: scroll;
+        }
+        
+        /* Add mobile scroll indicator */
+        .mobile-scroll-indicator {
+            display: none;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .mobile-scroll-indicator svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-right: 6px;
+            animation: scrollHint 1.5s infinite;
+        }
+        
+        @keyframes scrollHint {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-scroll-indicator {
+                display: block;
+            }
+            
+            /* Add faded edges to table to indicate scrollability */
+            .table-container:before, .table-container:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 15px;
+                z-index: 3;
+                pointer-events: none;
+            }
+            
+            .table-container:before {
+                left: 0;
+                background: linear-gradient(to right, var(--white), transparent);
+            }
+            
+            .table-container:after {
+                right: 0;
+                background: linear-gradient(to left, var(--white), transparent);
+            }
         }
         
         table {
@@ -671,10 +731,8 @@
 <body>
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
+           <div class="logo">
     <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
-    <span>Travel ER Program</span>
 </div>
                 <nav>
                     <ul>
@@ -761,6 +819,13 @@
                 <p class="section-subtitle">Flexible schedule options with comprehensive benefits</p>
             </div>
             
+            <div class="mobile-scroll-indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                </svg>
+                Swipe to see full table
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
