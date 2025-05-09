@@ -6,6 +6,944 @@
     <title>VCA Travel ER Program</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #002e6d;
+            --purple: #9b2743;
+            --teal: #00a9ce;
+            --gold: #ffc72c;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: var(--white);
+            font-size: 15px;
+        }
+        
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+        
+        .logo span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark-blue);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--teal);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: var(--dark-blue);
+            position: relative;
+            color: var(--white);
+            padding: 80px 0;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--purple);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: 30%;
+            width: 250px;
+            height: 250px;
+            background: var(--teal);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero-triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+        
+        .hero-triangle-1 {
+            top: 40px;
+            right: 15%;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 120px solid rgba(255, 255, 255, 0.05);
+            transform: rotate(25deg);
+        }
+        
+        .hero-triangle-2 {
+            bottom: 60px;
+            left: 10%;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 90px solid rgba(255, 255, 255, 0.05);
+            transform: rotate(-15deg);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 600px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--teal);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-wave {
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center bottom;
+            margin-top: -60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        section {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .dot-pattern {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-image: radial-gradient(circle, var(--teal) 1px, transparent 2px);
+            background-size: 18px 18px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .dot-pattern.top-right {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .dot-pattern.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        .section-header {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            color: var(--dark-blue);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--dark-blue));
+            border-radius: 10px;
+        }
+        
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            padding: 30px;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid {
+            display: grid;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 169, 206, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+        
+        .feature-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .highlight-banner {
+            padding: 25px;
+            background-color: rgba(0, 169, 206, 0.05);
+            border-left: 3px solid var(--teal);
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .highlight-banner.purple {
+            background-color: rgba(155, 39, 67, 0.05);
+            border-left-color: var(--purple);
+        }
+        
+        .custom-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .custom-list li {
+            margin-bottom: 12px;
+            padding-left: 22px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .custom-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--teal);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: rgba(0, 46, 109, 0.05);
+            color: var(--dark-blue);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background-color: rgba(0, 169, 206, 0.03);
+        }
+        
+        .cta-banner {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-blue) 100%);
+            padding: 40px;
+            color: var(--white);
+            text-align: center;
+            border-radius: 10px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+        
+        .cta-banner:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+        
+        .cta-banner h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .cta-banner p {
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+        
+        .footer-content {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-info {
+            flex: 1.5;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-info p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            flex: 1;
+        }
+        
+        .footer-links h3 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--teal);
+            border-radius: 2px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--teal);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            opacity: 0.7;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @media (max-width: 992px) {
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                gap: 40px;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-cols-2, 
+            .grid-cols-3, 
+            .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-wave {
+                height: 40px;
+                margin-top: -40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span>VCA Travel ER Program</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#compensation">Compensation</a></li>
+                        <li><a href="#licensure">Licensure</a></li>
+                        <li><a href="#travel">Travel</a></li>
+                        <li><a href="#onboarding">Onboarding</a></li>
+                        <li><a href="#expenses">Expenses</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-triangle hero-triangle-1"></div>
+        <div class="hero-triangle hero-triangle-2"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>VCA Travel ER Program</h1>
+                <p>Join our team of dedicated emergency relief veterinarians and make a difference in hospitals across the country with competitive compensation and flexible scheduling.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="section-wave"></div>
+
+    <section id="overview">
+        <div class="dot-pattern top-right"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Program Overview</h2>
+                <p class="section-subtitle">Emergency relief veterinary services across VCA hospital locations</p>
+            </div>
+            
+            <div class="highlight-banner">
+                <p>The VCA Travel ER Program connects skilled emergency veterinarians with hospitals in need of relief support. Work in various emergency and specialty hospitals across the country while enjoying competitive compensation, flexible scheduling, and comprehensive travel accommodations.</p>
+            </div>
+            
+            <div class="grid grid-cols-4">
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-content">
+                        <h3>Competitive Pay</h3>
+                        <p>$200K-$230K annual compensation with comprehensive benefits</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-content">
+                        <h3>Clinical Diversity</h3>
+                        <p>Work in various ER settings to expand expertise and professional network</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h3>Flexible Schedule</h3>
+                        <p>Choose 10 or 12 shifts per 4-week period with predictable time off</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-content">
+                        <h3>Multi-State Practice</h3>
+                        <p>License reimbursement for multiple states with booking flexibility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compensation">
+        <div class="dot-pattern bottom-left"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compensation & Benefits</h2>
+                <p class="section-subtitle">Flexible schedule options with comprehensive benefits</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Schedule Option</th>
+                            <th>Annual Compensation</th>
+                            <th>Vacation</th>
+                            <th>Sick Days</th>
+                            <th>CE Allowance</th>
+                            <th>CE Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>10 shifts / 4-week period</strong></td>
+                            <td>$200,000</td>
+                            <td>2 weeks</td>
+                            <td>5 days</td>
+                            <td>$3,000</td>
+                            <td>1 week (40 hours)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>12 shifts / 4-week period</strong></td>
+                            <td>$230,000</td>
+                            <td>2 weeks</td>
+                            <td>5 days</td>
+                            <td>$3,000</td>
+                            <td>1 week (40 hours)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlight-banner">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Salary-Only Structure</h3>
+                <p style="font-size: 0.95rem; line-height: 1.6;">This compensation is <strong>salary only</strong> with no production bonuses. As a Travel ER veterinarian, you won't have to worry about hospital volume or case load at facilities where you're filling shifts. We provide a generous base salary so you can focus solely on providing excellent patient care without concerns about production metrics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="licensure">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Licensure Reimbursement</h2>
+                <p class="section-subtitle">Expand your practice across multiple states</p>
+            </div>
+            
+            <div class="grid grid-cols-2">
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: var(--dark-blue); font-size: 1.1rem; font-weight: 600;">Standard Coverage</h3>
+                    <p style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">As part of the Travel ER Program, VCA will reimburse associates for:</p>
+                    <ul class="custom-list">
+                        <li>DEA license fees</li>
+                        <li>License fees for two states of your choice</li>
+                        <li>This is in addition to your regular CE allotment</li>
+                    </ul>
+                </div>
+                <div class="card" style="background-color: rgba(155, 39, 67, 0.05); border-left: 3px solid var(--purple);">
+                    <h3 style="margin-bottom: 15px; color: var(--purple); font-size: 1.1rem; font-weight: 600;">High-Need Hospital Opportunity</h3>
+                    <p style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">For hospitals with urgent staffing needs:</p>
+                    <ul class="custom-list">
+                        <li>Hospital covers additional state license reimbursement beyond the standard two licenses</li>
+                        <li>Apply for licensing within 7 days of accepting the offer</li>
+                        <li>Commit to 12 shifts over 2-3 periods once license is active</li>
+                        <li>Can be utilized multiple times with different high-need hospitals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="travel">
+        <div class="dot-pattern top-right"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Travel Agreement</h2>
+                <p class="section-subtitle">Comprehensive travel reimbursement policies</p>
+            </div>
+            
+            <div class="grid grid-cols-2" style="margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Travel Reimbursement</h3>
+                    <ul class="custom-list">
+                        <li><strong>Local Travel:</strong> Mileage reimbursed for hospitals within 4 hours drive</li>
+                        <li><strong>Long-Distance:</strong> Flights expensed for hospitals over 4 hours away</li>
+                        <li><strong>Rental Cars:</strong> Available with prior approval when flying/taking train</li>
+                        <li><strong>Consecutive Shifts:</strong> 3 shifts in a row required when flying</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Accommodations</h3>
+                    <ul class="custom-list">
+                        <li><strong>Pre-Shift Hotel:</strong> Covered if shift begins before 2pm</li>
+                        <li><strong>Post-Shift Hotel:</strong> Covered if shift ends after 2pm</li>
+                        <li><strong>Expenses:</strong> Use provided corporate AMEX for all charges</li>
+                        <li><strong>Rewards:</strong> Keep all travel points earned (hotel, airline, etc.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="onboarding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Onboarding Process</h2>
+                <p class="section-subtitle">Everything you need to get started</p>
+            </div>
+            
+            <div class="grid grid-cols-2">
+                <div class="feature" style="align-items: flex-start;">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-content">
+                        <h3>Training & Orientation</h3>
+                        <ul class="custom-list">
+                            <li>2 days of comprehensive WOOFWare system training</li>
+                            <li>Dedicated review of all Travel ER topics with your point person</li>
+                            <li>Laurice will be available for all questions during onboarding</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature" style="align-items: flex-start;">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-content">
+                        <h3>Shadow Program</h3>
+                        <ul class="custom-list">
+                            <li>Shadow shift required for first visit to any new location</li>
+                            <li>Shadow day counts toward your shift requirements</li>
+                            <li>Required for all DVMs, including experienced Travel program members</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expenses">
+        <div class="dot-pattern bottom-left"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Expenses & Bookings</h2>
+                <p class="section-subtitle">Managing your schedule and travel expenses</p>
+            </div>
+            
+            <div class="grid grid-cols-3">
+                <div class="feature">
+                    <div class="feature-icon">🖥️</div>
+                    <div class="feature-content">
+                        <h3>Booking System</h3>
+                        <p>Access our dedicated travel website to book shifts in any state where you're licensed</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h3>Shift Availability</h3>
+                        <p>Hospitals list all available ER shifts for the next 6 months</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💳</div>
+                    <div class="feature-content">
+                        <h3>Expense Management</h3>
+                        <p>You'll be provided with a corporate AMEX card for all travel expenses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-banner" style="background-color: rgba(255, 199, 44, 0.1); border-left: 3px solid var(--gold); margin-top: 25px; display: flex; align-items: center; gap: 20px;">
+                <div style="font-size: 2rem; display: flex; gap: 10px;">
+                    <span>✈️</span>
+                    <span>🏨</span>
+                    <span>🎁</span>
+                </div>
+                <div>
+                    <h3 style="color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 6px; font-weight: 600;">Travel Rewards Benefit</h3>
+                    <p style="font-size: 0.95rem; margin: 0; line-height: 1.6;">All rewards points earned from hotels, flights, and corporate card usage belong to you. Many travel doctors accumulate significant points for personal vacations and upgrades while helping hospitals in need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="cta-banner">
+            <h2>Additional Questions?</h2>
+            <p>Please reach out to the appropriate recruiter based on your home location:</p>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 20px 0; flex-wrap: wrap;">
+                <div style="text-align: left;">
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600;">Eastern United States</h3>
+                    <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 4px;">Nick Silva</p>
+                    <a href="mailto:nick.silva@vca.com" style="color: white; text-decoration: underline; font-size: 0.95rem;">nick.silva@vca.com</a>
+                </div>
+                <div style="text-align: left;">
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600;">Western United States</h3>
+                    <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 4px;">Heather Manion</p>
+                    <a href="mailto:heather.manion@vca.com" style="color: white; text-decoration: underline; font-size: 0.95rem;">heather.manion@vca.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <span class="footer-logo">VCA</span>
+                    <p>The VCA Travel ER Program connects skilled emergency veterinarians with hospitals across the country, providing excellent care where it's needed most. Join our team and make a difference while building your career.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#overview">Program Overview</a></li>
+                        <li><a href="#compensation">Compensation & Benefits</a></li>
+                        <li><a href="#licensure">Licensure Reimbursement</a></li>
+                        <li><a href="#travel">Travel Agreement</a></li>
+                        <li><a href="#onboarding">Onboarding Process</a></li>
+                        <li><a href="#expenses">Expenses & Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:nick.silva@vca.com">Eastern US - Nick Silva</a></li>
+                        <li><a href="mailto:heather.manion@vca.com">Western US - Heather Manion</a></li>
+                        <li><a href="https://www.vcacareers.com" target="_blank">VCA Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 VCA Animal Hospitals. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCA Travel ER Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -399,10 +1337,9 @@
     <header>
         <div class="container">
             <div class="header-content">
-               <div class="logo">
-    <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
-    <span>Travel ER Program</span>
-</div>
+                <div class="logo">
+                    <span>VCA Travel ER Program</span>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#overview">Overview</a></li>
@@ -496,7 +1433,7 @@
                             <td>$200,000</td>
                             <td>2 weeks</td>
                             <td>5 days</td>
-                            <td>$3,000/yr</td>
+                            <td>$3,000</td>
                             <td>1 week (40 hours)</td>
                         </tr>
                         <tr>
@@ -504,7 +1441,7 @@
                             <td>$230,000</td>
                             <td>2 weeks</td>
                             <td>5 days</td>
-                            <td>$3,000/yr</td>
+                            <td>$3,000</td>
                             <td>1 week (40 hours)</td>
                         </tr>
                     </tbody>
