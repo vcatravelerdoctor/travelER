@@ -108,80 +108,134 @@
         }
         
         .hero {
-            background: var(--dark-blue);
             position: relative;
+            padding: 0;
+            height: 400px; /* Reduced from 500px */
+            overflow: hidden;
             color: var(--white);
-            padding: 80px 0;
+        }
+        
+        .hero-diagonal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-blue);
+            clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
+            z-index: 1;
+        }
+        
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
             overflow: hidden;
         }
         
-        .hero:before {
-            content: '';
+        .shape {
             position: absolute;
-            top: -120px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: var(--purple);
-            opacity: 0.2;
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .hero:after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            right: 30%;
-            width: 250px;
-            height: 250px;
-            background: var(--teal);
             opacity: 0.1;
-            border-radius: 50%;
-            z-index: 0;
         }
         
-        .hero-triangle {
-            position: absolute;
+        .shape-circle-1 {
+            top: 20%;
+            left: 65%;
+            width: 150px; /* Reduced from 180px */
+            height: 150px; /* Reduced from 180px */
+            background: var(--teal);
+            border-radius: 50%;
+        }
+        
+        .shape-circle-2 {
+            bottom: 10%;
+            right: 15%;
+            width: 100px; /* Reduced from 120px */
+            height: 100px; /* Reduced from 120px */
+            background: var(--purple);
+            border-radius: 50%;
+        }
+        
+        .shape-triangle-1 {
+            top: 15%;
+            right: 25%;
             width: 0;
             height: 0;
-        }
-        
-        .hero-triangle-1 {
-            top: 40px;
-            right: 15%;
-            border-left: 80px solid transparent;
-            border-right: 80px solid transparent;
-            border-bottom: 120px solid rgba(255, 255, 255, 0.05);
+            border-left: 70px solid transparent; /* Reduced from 80px */
+            border-right: 70px solid transparent; /* Reduced from 80px */
+            border-bottom: 120px solid var(--gold); /* Reduced from 140px */
             transform: rotate(25deg);
         }
         
-        .hero-triangle-2 {
-            bottom: 60px;
-            left: 10%;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 90px solid rgba(255, 255, 255, 0.05);
+        .shape-triangle-2 {
+            bottom: 25%;
+            left: 55%;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent; /* Reduced from 60px */
+            border-right: 50px solid transparent; /* Reduced from 60px */
+            border-bottom: 80px solid var(--teal); /* Reduced from 100px */
             transform: rotate(-15deg);
         }
         
         .hero-content {
             position: relative;
+            z-index: 3;
+            padding: 70px 0; /* Reduced from 100px */
             max-width: 600px;
-            z-index: 1;
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 3rem; /* Reduced from 3.5rem */
+            line-height: 1.1;
+            margin-bottom: 20px; /* Reduced from 25px */
+            position: relative;
             font-weight: 700;
+            padding-bottom: 15px; /* Reduced from 20px */
+        }
+        
+        .hero h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px; /* Reduced from 5px */
+            background: linear-gradient(90deg, var(--teal), var(--purple));
+            border-radius: 3px;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.15rem; /* Reduced from 1.25rem */
             line-height: 1.6;
+            max-width: 500px;
             opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                min-height: 320px; /* Reduced from 400px */
+            }
+            
+            .hero-diagonal {
+                clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+            }
+            
+            .hero-content {
+                padding: 50px 0; /* Reduced from 60px */
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem; /* Reduced from 2.5rem */
+            }
+            
+            .shape-circle-1, .shape-triangle-1 {
+                display: none;
+            }
         }
         
         .btn {
@@ -619,9 +673,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-    <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
-    <span>Travel ER Program</span>
-</div>
+                    <span>VCA Travel ER Program</span>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="#overview">Overview</a></li>
@@ -637,8 +690,13 @@
     </header>
 
     <section class="hero">
-        <div class="hero-triangle hero-triangle-1"></div>
-        <div class="hero-triangle hero-triangle-2"></div>
+        <div class="hero-diagonal"></div>
+        <div class="hero-shapes">
+            <div class="shape shape-circle-1"></div>
+            <div class="shape shape-circle-2"></div>
+            <div class="shape shape-triangle-1"></div>
+            <div class="shape shape-triangle-2"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <h1>VCA Travel ER Program</h1>
