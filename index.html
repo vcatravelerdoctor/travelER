@@ -793,43 +793,44 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-    <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
-    <span>Travel ER Program</span>
-</div>
-                <nav>
-                    <ul>
-                        <li><a href="#overview">Overview</a></li>
-                        <li><a href="#compensation">Compensation</a></li>
-                        <li><a href="#licensure">Licensure</a></li>
-                        <li><a href="#travel">Travel</a></li>
-                        <li><a href="#onboarding">Onboarding</a></li>
-                        <li><a href="#expenses">Expenses</a></li>
-                        <li><a href="#testimonial-cta">Doctor Testimonial</a></li>
-
-                    </ul>
-                </nav>
+   <header>
+    <div class="container">
+        <div class="header-content" style="position: relative;">
+            <div class="logo">
+                <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
+                <span>Travel ER Program</span>
             </div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#compensation">Compensation</a></li>
+                    <li><a href="#licensure">Licensure</a></li>
+                    <li><a href="#travel">Travel</a></li>
+                    <li><a href="#onboarding">Onboarding</a></li>
+                    <li><a href="#expenses">Expenses</a></li>
+                    <li><a href="#testimonial-cta">Doctor Testimonial</a></li>
+                </ul>
+            </nav>
+            <!-- Hamburger button (mobile only) -->
+            <button id="hamburger" aria-label="Open menu" style="display:none; position: absolute; right: 0; top: 50%; transform: translateY(-50%);">
+                &#9776;
+            </button>
         </div>
-        <!-- Hamburger button (mobile only) -->
-<button id="hamburger" aria-label="Open menu" style="display:none;">
-  &#9776;
-</button>
-
-<!-- Mobile Sidebar Menu -->
-<nav id="mobileNav" style="display:none;">
-  <ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#benefits">Benefits</a></li>
-    <li><a href="#expenses">Expenses & Bookings</a></li>
-    <li><a href="#testimonial-cta">Current Doctor Testimonial</a></li>
-  </ul>
-</nav>
-<div id="mobileNavOverlay" style="display:none;"></div>
-    </header>
+    </div>
+    <!-- Mobile Sidebar Menu (outside .container for z-index/overlay) -->
+    <nav id="mobileNav" style="display:none;">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#compensation">Compensation</a></li>
+            <li><a href="#licensure">Licensure</a></li>
+            <li><a href="#travel">Travel</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
+            <li><a href="#expenses">Expenses</a></li>
+            <li><a href="#testimonial-cta">Doctor Testimonial</a></li>
+        </ul>
+    </nav>
+    <div id="mobileNavOverlay" style="display:none;"></div>
+</header>
 
     <section class="hero">
         <div class="hero-diagonal"></div>
