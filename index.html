@@ -726,6 +726,70 @@
                 margin-top: -40px;
             }
         }
+        /* Hamburger defaults hidden on desktop */
+#hamburger {
+  font-size: 2.2rem;
+  background: none;
+  border: none;
+  color: var(--vca-blue, #003B71);
+  cursor: pointer;
+  z-index: 2001;
+  position: absolute;
+  top: 26px;
+  right: 22px;
+  display: none;
+}
+
+#mobileNavOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 2000;
+}
+
+/* Mobile sidebar nav */
+#mobileNav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--vca-blue, #003B71);
+  box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+  z-index: 2002;
+  padding-top: 48px;
+  transition: transform 0.23s;
+}
+
+#mobileNav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#mobileNav li {
+  margin: 28px 0;
+  text-align: left;
+  padding-left: 32px;
+}
+
+#mobileNav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.13rem;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  nav ul { display: none; } /* Hide desktop nav */
+  #hamburger { display: block; }
+  #mobileNav { display: block; transform: translateX(100%);}
+  #mobileNav.active { transform: translateX(0);}
+  #mobileNavOverlay { display: none;}
+  #mobileNavOverlay.active { display: block;}
+}
     </style>
 </head>
 <body>
@@ -750,6 +814,21 @@
                 </nav>
             </div>
         </div>
+        <!-- Hamburger button (mobile only) -->
+<button id="hamburger" aria-label="Open menu" style="display:none;">
+  &#9776;
+</button>
+
+<!-- Mobile Sidebar Menu -->
+<nav id="mobileNav" style="display:none;">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#expenses">Expenses & Bookings</a></li>
+    <li><a href="#testimonial-cta">Current Doctor Testimonial</a></li>
+  </ul>
+</nav>
+<div id="mobileNavOverlay" style="display:none;"></div>
     </header>
 
     <section class="hero">
@@ -1121,5 +1200,28 @@
             </div>
         </div>
     </footer>
+    <script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('mobileNavOverlay');
+  // Show menu
+  hamburger.onclick = function() {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+  };
+  // Hide on overlay click
+  overlay.onclick = function() {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+  };
+  // Hide on nav link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.onclick = function() {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+  });
+</script>
+
 </body>
 </html>
