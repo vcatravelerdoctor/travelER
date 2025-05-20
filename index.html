@@ -1,285 +1,1227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VCA Travel ER Program</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --vca-blue: #003B71;
-      --vca-coral: #E05A3F;
-      --vca-purple: #A2689E;
-      --vca-teal: #45C5D4;
-      --white: #fff;
-      --radius: 8px;
-      --transition: 0.3s;
-      --font-family: 'Montserrat', sans-serif;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-family);
-      color: #333;
-      background: #fafafa;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0,59,113, 0.97);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    }
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      position: relative;
-    }
-    header img {
-      height: 45px;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 1.3rem;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      transition: color var(--transition);
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 5px;
-    }
-    nav a:hover, nav a:focus {
-      color: var(--vca-coral);
-      background: rgba(224,90,63,0.08);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCA Travel ER Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #002e6d;
+            --purple: #9b2743;
+            --teal: #00a9ce;
+            --gold: #ffc72c;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.5;
+            background-color: var(--white);
+            font-size: 15px;
+        }
+        
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+        
+        .logo span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark-blue);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--teal);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            position: relative;
+            padding: 0;
+            height: 400px; /* Reduced from 500px */
+            overflow: hidden;
+            color: var(--white);
+        }
+        
+        .hero-diagonal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-blue);
+            clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
+            z-index: 1;
+        }
+        
+        .hero-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+        }
+        
+        .shape-circle-1 {
+            top: 20%;
+            left: 65%;
+            width: 150px; /* Reduced from 180px */
+            height: 150px; /* Reduced from 180px */
+            background: var(--teal);
+            border-radius: 50%;
+        }
+        
+        .shape-circle-2 {
+            bottom: 10%;
+            right: 15%;
+            width: 100px; /* Reduced from 120px */
+            height: 100px; /* Reduced from 120px */
+            background: var(--purple);
+            border-radius: 50%;
+        }
+        
+        .shape-triangle-1 {
+            top: 15%;
+            right: 25%;
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent; /* Reduced from 80px */
+            border-right: 70px solid transparent; /* Reduced from 80px */
+            border-bottom: 120px solid var(--gold); /* Reduced from 140px */
+            transform: rotate(25deg);
+        }
+        
+        .shape-triangle-2 {
+            bottom: 25%;
+            left: 55%;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent; /* Reduced from 60px */
+            border-right: 50px solid transparent; /* Reduced from 60px */
+            border-bottom: 80px solid var(--teal); /* Reduced from 100px */
+            transform: rotate(-15deg);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 70px 0; /* Reduced from 100px */
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem; /* Reduced from 3.5rem */
+            line-height: 1.1;
+            margin-bottom: 20px; /* Reduced from 25px */
+            position: relative;
+            font-weight: 700;
+            padding-bottom: 15px; /* Reduced from 20px */
+        }
+        
+        .hero h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px; /* Reduced from 5px */
+            background: linear-gradient(90deg, var(--teal), var(--purple));
+            border-radius: 3px;
+        }
+        
+        .hero p {
+            font-size: 1.15rem; /* Reduced from 1.25rem */
+            line-height: 1.6;
+            max-width: 500px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                min-height: 320px; /* Reduced from 400px */
+            }
+            
+            .hero-diagonal {
+                clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+            }
+            
+            .hero-content {
+                padding: 50px 0; /* Reduced from 60px */
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem; /* Reduced from 2.5rem */
+            }
+            
+            .shape-circle-1, .shape-triangle-1 {
+                display: none;
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--teal);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-wave {
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center bottom;
+            margin-top: -60px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        section {
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .dot-pattern {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-image: radial-gradient(circle, var(--teal) 1px, transparent 2px);
+            background-size: 18px 18px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .dot-pattern.top-right {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .dot-pattern.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        .section-header {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            color: var(--dark-blue);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--dark-blue));
+            border-radius: 10px;
+        }
+        
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            padding: 30px;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid {
+            display: grid;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 169, 206, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+        
+        .feature-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .highlight-banner {
+            padding: 25px;
+            background-color: rgba(0, 169, 206, 0.05);
+            border-left: 3px solid var(--teal);
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .highlight-banner.purple {
+            background-color: rgba(155, 39, 67, 0.05);
+            border-left-color: var(--purple);
+        }
+        
+        .custom-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .custom-list li {
+            margin-bottom: 12px;
+            padding-left: 22px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .custom-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--teal);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+            background-color: var(--white);
+            /* Add scroll shadowing effect */
+            background-image: 
+                linear-gradient(to right, var(--white) 75%, rgba(255, 255, 255, 0)),
+                linear-gradient(to right, rgba(255, 255, 255, 0), var(--white) 25%);
+            background-position: 0 0, 100% 0;
+            background-repeat: no-repeat;
+            background-size: 20px 100%;
+            background-attachment: scroll;
+        }
+        
+        /* Add mobile scroll indicator */
+        .mobile-scroll-indicator {
+            display: none;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .mobile-scroll-indicator svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            margin-right: 6px;
+            animation: scrollHint 1.5s infinite;
+        }
+        
+        @keyframes scrollHint {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-scroll-indicator {
+                display: block;
+            }
+            
+            /* Add faded edges to table to indicate scrollability */
+            .table-container:before, .table-container:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 15px;
+                z-index: 3;
+                pointer-events: none;
+            }
+            
+            .table-container:before {
+                left: 0;
+                background: linear-gradient(to right, var(--white), transparent);
+            }
+            
+            .table-container:after {
+                right: 0;
+                background: linear-gradient(to left, var(--white), transparent);
+            }
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: rgba(0, 46, 109, 0.05);
+            color: var(--dark-blue);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background-color: rgba(0, 169, 206, 0.03);
+        }
+        
+        .cta-banner {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--dark-blue) 100%);
+            padding: 40px;
+            color: var(--white);
+            text-align: center;
+            border-radius: 10px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+        
+        .cta-banner:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+        
+        .cta-banner h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .cta-banner p {
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+        
+        .footer-content {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-info {
+            flex: 1.5;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-info p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            flex: 1;
+        }
+        
+        .footer-links h3 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--teal);
+            border-radius: 2px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--teal);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            opacity: 0.7;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @media (max-width: 992px) {
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                gap: 40px;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-cols-2, 
+            .grid-cols-3, 
+            .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-wave {
+                height: 40px;
+                margin-top: -40px;
+            }
+        }
+        /* Hamburger defaults hidden on desktop */
+#hamburger {
+  font-size: 2.2rem;
+  background: none;
+  border: none;
+  color: var(--vca-blue, #003B71);
+  cursor: pointer;
+  z-index: 2001;
+  position: absolute;
+  top: 26px;
+  right: 22px;
+  display: none;
+}
 
-    /* Hamburger button */
-    #hamburger {
-      font-size: 2.3rem;
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      z-index: 2001;
-      position: absolute;
-      top: 50%;
-      right: 22px;
-      transform: translateY(-50%);
-      display: none;
-      padding: 4px 10px;
-      line-height: 1;
-    }
+#mobileNavOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 2000;
+}
 
-    #mobileNavOverlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 2000;
-    }
+/* Mobile sidebar nav */
+#mobileNav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--vca-blue, #003B71);
+  box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+  z-index: 2002;
+  padding-top: 48px;
+  transition: transform 0.23s;
+}
 
-    #mobileNav {
-      display: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 260px;
-      height: 100vh;
-      background: var(--vca-blue, #003B71);
-      box-shadow: -2px 0 12px rgba(0,0,0,0.15);
-      z-index: 2002;
-      padding-top: 65px;
-      transition: transform 0.23s;
-      transform: translateX(100%);
-    }
-    #mobileNav.active {
-      transform: translateX(0);
-      display: block;
-    }
-    #mobileNav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #mobileNav li {
-      margin: 28px 0;
-      text-align: left;
-      padding-left: 32px;
-    }
-    #mobileNav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.13rem;
-      font-weight: 600;
-    }
+#mobileNav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    @media (max-width: 900px) {
-      nav ul { display: none; } /* Hide desktop nav on mobile */
-      #hamburger { display: block; }
-      #mobileNav { display: block; }
-    }
+#mobileNav li {
+  margin: 28px 0;
+  text-align: left;
+  padding-left: 32px;
+}
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 0 0.3rem;
-      }
-      #mobileNav {
-        width: 90vw;
-        min-width: 180px;
-      }
-      #mobileNav li {
-        padding-left: 16px;
-      }
-    }
+#mobileNav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.13rem;
+  font-weight: 600;
+}
 
-    /* Main content styles omitted for brevity but should stay as before */
-    section { padding: 4rem 0; }
-    section:nth-of-type(even) { background: #f9f9f9; }
-    section h2 {
-      font-size: 2.5rem;
-      color: var(--vca-blue);
-      margin-bottom: 1rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    section h2::after {
-      content: '';
-      position: absolute;
-      width: 60px;
-      height: 4px;
-      background: var(--vca-coral);
-      bottom: 0;
-      left: 0;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-    }
-    .card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    .card h3 {
-      margin-bottom: 0.75rem;
-      color: var(--vca-purple);
-      font-size: 1.25rem;
-    }
-    .card p, .card ul { font-size: 1rem; }
-    .card ul li { margin-bottom: 0.5rem; }
-    footer {
-      background: #fff;
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #eaeaea;
-    }
-  </style>
+@media (max-width: 900px) {
+  nav ul { display: none; } /* Hide desktop nav */
+  #hamburger { display: block; }
+  #mobileNav { display: block; transform: translateX(100%);}
+  #mobileNav.active { transform: translateX(0);}
+  #mobileNavOverlay { display: none;}
+  #mobileNavOverlay.active { display: block;}
+}
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container header-content">
-      <img src="assets/VCA_logo.svg.png" alt="VCA Logo">
-      <nav>
-        <ul>
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#benefits">Benefits</a></li>
-          <li><a href="#logistics">Logistics</a></li>
-          <li><a href="#onboarding">Onboarding</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#testimonial-cta">Current Doctor Testimonial</a></li>
-        </ul>
-      </nav>
-      <!-- Hamburger button (mobile only) -->
-      <button id="hamburger" aria-label="Open menu">&#9776;</button>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+    <img src="VCA_logo.svg.png" alt="VCA Logo" class="logo-img">
+    <span>Travel ER Program</span>
+</div>
+                <nav>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#compensation">Compensation</a></li>
+                        <li><a href="#licensure">Licensure</a></li>
+                        <li><a href="#travel">Travel</a></li>
+                        <li><a href="#onboarding">Onboarding</a></li>
+                        <li><a href="#expenses">Expenses</a></li>
+                        <li><a href="#testimonial-cta">Doctor Testimonial</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- Hamburger button (mobile only) -->
+<button id="hamburger" aria-label="Open menu" style="display:none;">
+  &#9776;
+</button>
+
+<!-- Mobile Sidebar Menu -->
+<nav id="mobileNav" style="display:none;">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#expenses">Expenses & Bookings</a></li>
+    <li><a href="#testimonial-cta">Current Doctor Testimonial</a></li>
+  </ul>
+</nav>
+<div id="mobileNavOverlay" style="display:none;"></div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-diagonal"></div>
+        <div class="hero-shapes">
+            <div class="shape shape-circle-1"></div>
+            <div class="shape shape-circle-2"></div>
+            <div class="shape shape-triangle-1"></div>
+            <div class="shape shape-triangle-2"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>VCA Travel ER Program</h1>
+                <p>Join our team of dedicated emergency relief veterinarians and make a difference in hospitals across the country with competitive compensation and flexible scheduling.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="section-wave"></div>
+
+    <section id="overview">
+        <div class="dot-pattern top-right"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Program Overview</h2>
+                <p class="section-subtitle">Emergency relief veterinary services across VCA hospital locations</p>
+            </div>
+            
+            <div class="highlight-banner">
+                <p>The VCA Travel ER Program connects skilled emergency veterinarians with hospitals in need of relief support. Work in various emergency and specialty hospitals across the country while enjoying competitive compensation, flexible scheduling, and comprehensive travel accommodations.</p>
+            </div>
+            
+            <div class="grid grid-cols-4">
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-content">
+                        <h3>Competitive Pay</h3>
+                        <p>$200K-$230K annual compensation with comprehensive benefits</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-content">
+                        <h3>Clinical Diversity</h3>
+                        <p>Work in various ER settings to expand expertise and professional network</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h3>Flexible Schedule</h3>
+                        <p>Choose 10 or 12 shifts per 4-week period with predictable time off</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-content">
+                        <h3>Multi-State Practice</h3>
+                        <p>License reimbursement for multiple states with booking flexibility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compensation">
+        <div class="dot-pattern bottom-left"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Compensation & Benefits</h2>
+                <p class="section-subtitle">Flexible schedule options with comprehensive benefits</p>
+            </div>
+            
+            <div class="mobile-scroll-indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5l7 7-7 7"></path>
+                </svg>
+                Swipe to see full table
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Schedule Option</th>
+                            <th>Annual Compensation</th>
+                            <th>Vacation</th>
+                            <th>Sick Days</th>
+                            <th>CE Allowance</th>
+                            <th>CE Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>10 shifts / 4-week period</strong></td>
+                            <td>$200,000</td>
+                            <td>2 weeks</td>
+                            <td>5 days</td>
+                            <td>$3,000</td>
+                            <td>1 week (40 hours)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>12 shifts / 4-week period</strong></td>
+                            <td>$230,000</td>
+                            <td>2 weeks</td>
+                            <td>5 days</td>
+                            <td>$3,000</td>
+                            <td>1 week (40 hours)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlight-banner">
+                <h3 style="margin-bottom: 8px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Salary-Only Structure</h3>
+                <p style="font-size: 0.95rem; line-height: 1.6;">This compensation is <strong>salary only</strong> with no production bonuses. As a Travel ER veterinarian, you won't have to worry about hospital volume or case load at facilities where you're filling shifts. We provide a generous base salary so you can focus solely on providing excellent patient care without concerns about production metrics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="licensure">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Licensure Reimbursement</h2>
+                <p class="section-subtitle">Expand your practice across multiple states</p>
+            </div>
+            
+            <div class="grid grid-cols-2">
+                <div class="card">
+                    <h3 style="margin-bottom: 15px; color: var(--dark-blue); font-size: 1.1rem; font-weight: 600;">Standard Coverage</h3>
+                    <p style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">As part of the Travel ER Program, VCA will reimburse associates for:</p>
+                    <ul class="custom-list">
+                        <li>DEA license fees</li>
+                        <li>License fees for two states of your choice</li>
+                        <li>This is in addition to your regular CE allotment</li>
+                    </ul>
+                </div>
+                <div class="card" style="background-color: rgba(155, 39, 67, 0.05); border-left: 3px solid var(--purple);">
+                    <h3 style="margin-bottom: 15px; color: var(--purple); font-size: 1.1rem; font-weight: 600;">High-Need Hospital Opportunity</h3>
+                    <p style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">For hospitals with urgent staffing needs:</p>
+                    <ul class="custom-list">
+                        <li>Hospital covers additional state license reimbursement beyond the standard two licenses</li>
+                        <li>Apply for licensing within 7 days of accepting the offer</li>
+                        <li>Commit to 12 shifts over 2-3 periods once license is active</li>
+                        <li>Can be utilized multiple times with different high-need hospitals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="travel">
+        <div class="dot-pattern top-right"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Travel Agreement</h2>
+                <p class="section-subtitle">Comprehensive travel reimbursement policies</p>
+            </div>
+            
+            <div class="grid grid-cols-2" style="margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Travel Reimbursement</h3>
+                    <ul class="custom-list">
+                        <li><strong>Local Travel:</strong> Mileage reimbursed for hospitals within 4 hours drive</li>
+                        <li><strong>Long-Distance:</strong> Flights expensed for hospitals over 4 hours away</li>
+                        <li><strong>Rental Cars:</strong> Available with prior approval when flying/taking train</li>
+                        <li><strong>Consecutive Shifts:</strong> 3 shifts in a row required when flying</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600;">Accommodations</h3>
+                    <ul class="custom-list">
+                        <li><strong>Pre-Shift Hotel:</strong> Covered if shift begins before 2pm</li>
+                        <li><strong>Post-Shift Hotel:</strong> Covered if shift ends after 2pm</li>
+                        <li><strong>Expenses:</strong> Use provided corporate AMEX for all charges</li>
+                        <li><strong>Rewards:</strong> Keep all travel points earned (hotel, airline, etc.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="onboarding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Onboarding Process</h2>
+                <p class="section-subtitle">Everything you need to get started</p>
+            </div>
+            
+            <div class="grid grid-cols-2">
+                <div class="feature" style="align-items: flex-start;">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-content">
+                        <h3>Training & Orientation</h3>
+                        <ul class="custom-list">
+                            <li>2 days of comprehensive WOOFWare system training</li>
+                            <li>Dedicated review of all Travel ER topics with your point person</li>
+                            <li>Laurice will be available for all questions during onboarding</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature" style="align-items: flex-start;">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-content">
+                        <h3>Shadow Program</h3>
+                        <ul class="custom-list">
+                            <li>Shadow shift required for first visit to any new location</li>
+                            <li>Shadow day counts toward your shift requirements</li>
+                            <li>Required for all DVMs, including experienced Travel program members</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expenses">
+        <div class="dot-pattern bottom-left"></div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Expenses & Bookings</h2>
+                <p class="section-subtitle">Managing your schedule and travel expenses</p>
+            </div>
+            
+            <div class="grid grid-cols-3">
+                <div class="feature">
+                    <div class="feature-icon">🖥️</div>
+                    <div class="feature-content">
+                        <h3>Booking System</h3>
+                        <p>Access our dedicated travel website to book shifts in any state where you're licensed</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-content">
+                        <h3>Shift Availability</h3>
+                        <p>Hospitals list all available ER shifts for the next 6 months</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💳</div>
+                    <div class="feature-content">
+                        <h3>Expense Management</h3>
+                        <p>You'll be provided with a corporate AMEX card for all travel expenses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-banner" style="background-color: rgba(255, 199, 44, 0.1); border-left: 3px solid var(--gold); margin-top: 25px; display: flex; align-items: center; gap: 20px;">
+                <div style="font-size: 2rem; display: flex; gap: 10px;">
+                    <span>✈️</span>
+                    <span>🏨</span>
+                    <span>🎁</span>
+                </div>
+                <div>
+                    <h3 style="color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 6px; font-weight: 600;">Travel Rewards Benefit</h3>
+                    <p style="font-size: 0.95rem; margin: 0; line-height: 1.6;">All rewards points earned from hotels, flights, and corporate card usage belong to you. Many travel doctors accumulate significant points for personal vacations and upgrades while helping hospitals in need.</p>
+                </div>
+            </div>
+        </div>
+       <div id="testimonial-cta" style="text-align: center; margin-top: 40px; scroll-margin-top: 100px;">
+  <a href="https://www.vcacareers.com/global/en/blogarticle/a-day-in-the-life-on-the-road-with-vca-s-new-travel-er-program?utm_source=postcard&utm_medium=qr&utm_campaign=travel_emergency&utm_id=traveler" target="_blank" style="text-decoration: none;">
+    <div style="
+        display: inline-block;
+        background-color: var(--teal);
+        color: var(--white);
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        max-width: 600px;
+        width: 90%;
+    " onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+      <h3 style="margin-bottom: 8px; font-size: 1.3rem; color: var(--white); font-weight: 700;">On the Road with VCA</h3>
+      <p style="font-size: 0.95rem; margin: 0; line-height: 1.5; opacity: 0.9;">Click here to get a behind-the-scenes look at VCA's Travel ER program through the eyes of current travel doctor, Corey Woodcock DVM</p>
     </div>
-    <!-- Mobile Sidebar Menu -->
-    <nav id="mobileNav">
-      <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#benefits">Benefits</a></li>
-        <li><a href="#logistics">Logistics</a></li>
-        <li><a href="#onboarding">Onboarding</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#testimonial-cta">Current Doctor Testimonial</a></li>
-      </ul>
-    </nav>
-    <div id="mobileNavOverlay"></div>
-  </header>
+  </a>
+</div>
 
-  <!-- The rest of your HTML content goes here (sections, etc.) -->
-  <!-- ... -->
+    </section>
+    
+    <section style="padding-top: 20px; padding-bottom: 40px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Hospital Locations</h2>
+                <p class="section-subtitle">View our hospital locations across the country</p>
+            </div>
+            
+            <div class="map-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; /* 16:9 aspect ratio */ margin-bottom: 30px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+                <iframe src="https://www.google.com/maps/d/embed?mid=1lAE4PuMkSD_fpV1mWCkDPrlp_WZc_O0&ehbc=2E312F" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" title="VCA ER Hospital Locations" loading="lazy" allowfullscreen></iframe>
+            </div>
+            
+            <div class="map-legend" style="background-color: var(--white); border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); margin-bottom: 20px;">
+                <h3 style="color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 15px; font-weight: 600;">Map Legend</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 16px; height: 16px; background-color: #2196F3; border-radius: 50%;"></div>
+                        <span style="font-size: 0.95rem;">ER/Specialty hospital not participating in travel program</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 16px; height: 16px; background-color: #4CAF50; border-radius: 50%;"></div>
+                        <span style="font-size: 0.95rem;">Hospital utilizing travel relief doctors</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 16px; height: 16px; background-color: #FF5722; border-radius: 50%; position: relative;">
+                            <div style="position: absolute; top: -2px; right: -2px; font-size: 0.8rem;">🔥</div>
+                        </div>
+                        <span style="font-size: 0.95rem;">Hospital with 20+ open relief shifts per month</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 16px; height: 16px; background-color: #FFC107; border-radius: 50%; position: relative;">
+                            <div style="position: absolute; top: -2px; right: -2px; font-size: 0.8rem;">$</div>
+                        </div>
+                        <span style="font-size: 0.95rem;">Hospital offering license reimbursement for high-need coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Example Testimonial Section Anchor -->
-  <div id="testimonial-cta" style="text-align: center; margin-top: 40px;">
-    <a href="https://www.vcacareers.com/global/en/blogarticle/a-day-in-the-life-on-the-road-with-vca-s-new-travel-er-program?utm_source=postcard&utm_medium=qr&utm_campaign=travel_emergency&utm_id=traveler" target="_blank" style="text-decoration: none;">
-      <div style="
-          display: inline-block;
-          background-color: var(--vca-teal);
-          color: var(--white);
-          padding: 20px 30px;
-          border-radius: 10px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-          transition: all 0.3s;
-          max-width: 600px;
-          width: 90%;
-      " onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-        <h3 style="margin-bottom: 8px; font-size: 1.3rem; color: var(--white); font-weight: 700;">On the Road with VCA</h3>
-        <p style="font-size: 0.95rem; margin: 0; line-height: 1.5; opacity: 0.9;">Get a behind-the-scenes look at VCA's Travel ER program through the eyes of current travel doctor, Corey Woodcock DVM</p>
-      </div>
-    </a>
-  </div>
-
-  <footer>
     <div class="container">
-      &copy; 2025 VCA Animal Hospitals. All rights reserved.
+        <div class="cta-banner">
+            <h2>Additional Questions?</h2>
+            <p>Please reach out to the appropriate recruiter based on your home location:</p>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 20px 0; flex-wrap: wrap;">
+                <div style="text-align: left;">
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600;">Eastern United States</h3>
+                    <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 4px;">Nick Silva</p>
+                    <a href="mailto:nick.silva@vca.com" style="color: white; text-decoration: underline; font-size: 0.95rem;">nick.silva@vca.com</a>
+                </div>
+                <div style="text-align: left;">
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600;">Western United States</h3>
+                    <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 4px;">Heather Manion</p>
+                    <a href="mailto:heather.manion@vca.com" style="color: white; text-decoration: underline; font-size: 0.95rem;">heather.manion@vca.com</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    const overlay = document.getElementById('mobileNavOverlay');
-    // Show menu
-    hamburger.onclick = function() {
-      mobileNav.classList.add('active');
-      overlay.classList.add('active');
-    };
-    // Hide on overlay click
-    overlay.onclick = function() {
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <span class="footer-logo">VCA</span>
+                    <p>The VCA Travel ER Program connects skilled emergency veterinarians with hospitals across the country, providing excellent care where it's needed most. Join our team and make a difference while building your career.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#overview">Program Overview</a></li>
+                        <li><a href="#compensation">Compensation & Benefits</a></li>
+                        <li><a href="#licensure">Licensure Reimbursement</a></li>
+                        <li><a href="#travel">Travel Agreement</a></li>
+                        <li><a href="#onboarding">Onboarding Process</a></li>
+                        <li><a href="#expenses">Expenses & Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:nick.silva@vca.com">Eastern US - Nick Silva</a></li>
+                        <li><a href="mailto:heather.manion@vca.com">Western US - Heather Manion</a></li>
+                        <li><a href="https://www.vcacareers.com" target="_blank">VCA Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 VCA Animal Hospitals. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const overlay = document.getElementById('mobileNavOverlay');
+  // Show menu
+  hamburger.onclick = function() {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+  };
+  // Hide on overlay click
+  overlay.onclick = function() {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+  };
+  // Hide on nav link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.onclick = function() {
       mobileNav.classList.remove('active');
       overlay.classList.remove('active');
-    };
-    // Hide on nav link click
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.onclick = function() {
-        mobileNav.classList.remove('active');
-        overlay.classList.remove('active');
-      }
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 </html>
